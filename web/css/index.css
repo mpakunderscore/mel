@@ -29,6 +29,7 @@ body {
 
 #menu {
     position: fixed;
+    flex-direction: column;
 
     left: 20px;
     top: 20px;
@@ -67,4 +68,10 @@ body {
     z-index: 1;
 
     background-color: white;
+}
+
+#results {
+    padding: 20px;
+    margin: 20px;
+    background-color: lightcyan;
 }
