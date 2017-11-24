@@ -10,18 +10,31 @@ function results() {
             $("#results-head").append("<td data-sort-method='number'>" + data.questions[key].title + "</td>")
         }
 
-        for (let key in data.teams) {
-            if (data.teams.hasOwnProperty(key)) {
+        for (let i in data.teams) {
+            if (data.teams.hasOwnProperty(i)) {
 
-                let tr = "<tr id='" + data.teams[key].id + "'>";
+                let tr = "<tr id='" + data.teams[i].id + "'>";
 
-                tr += "<td>" + data.teams[key].name + "</td>";
+                tr += "<td>" + data.teams[i].name + "</td>";
 
-                tr += "<td>" + data.teams[key].id + "</td>";
+                tr += "<td>" + data.teams[i].id + "</td>";
 
-                for (let key in data.questions) {
 
-                    tr += "<td data-sort-method='thead'>" + 0 + "</td>";
+
+                for (let j in data.questions) {
+
+                    if (data.teams[i].answers !== undefined && data.teams[i].answers[j] !== undefined) {
+
+                        if (data.teams[i].answers[j].success)
+                            tr += "<td data-sort-method='thead' class='green'>" + data.teams[i].answers[j].attempts + "</td>";
+
+                        else
+                            tr += "<td data-sort-method='thead'>" + data.teams[i].answers[j].attempts + "</td>";
+
+                    } else {
+
+                        tr += "<td data-sort-method='thead'>" + 0 + "</td>";
+                    }
                 }
 
                 tr += "</tr>";

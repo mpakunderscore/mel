@@ -75,7 +75,7 @@ body {
 }
 
 #results {
-    min-width: 500px;
+    width: 100%;
 
     margin-top: 200px;
 
@@ -147,4 +147,13 @@ body {
 
 .button:hover {
     color: #86c220;
+}
+
+th {
+    text-align: left;
+}
+
+.green {
+    /*color: green;*/
+    background-color: lightgreen;
 }

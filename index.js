@@ -31,6 +31,23 @@ app.get('/teams', function (request, response) {
     out.teams = state.teams;
     out.questions = state.questions;
 
+    // out.answers = state.answers;
+
+    for (let i in out.teams) {
+        out.teams[i].answers = {};
+
+        for (let j in state.questions) {
+
+            if (state.answers[j + "|" + i] !== undefined) {
+                // console.log(state.answers[j + "|" + i].success);
+                // console.log(state.answers[j + "|" + i].attempts);
+
+                out.teams[i].answers[j] = {success: state.answers[j + "|" + i].success,
+                    attempts: state.answers[j + "|" + i].attempts};
+            }
+        }
+    }
+
     response.json(out);
 });
 
@@ -77,7 +94,7 @@ app.get('/team/create/:name', function (request, response) {
 //TEAM
 app.get('/answer', function (request, response) {
 
-    let teamId = 0;
+    let teamId = 1;
     let questionId = request.param('question');
 
     let serverAnswer = state.answers[request.param('question') + "|" + teamId];
