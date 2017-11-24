@@ -11,7 +11,7 @@ let set = {
     }
 };
 
-// let sequelize = new Sequelize('forest', 'pavelkuzmin', '', set);
+// let sequelize = new Sequelize('mel', 'pavelkuzmin', '', set);
 let sequelize = new Sequelize(process.env.DATABASE_URL);
 
 let Team = sequelize.define('team', {
@@ -28,32 +28,27 @@ let Answer = sequelize.define('answer', {
     answer: Sequelize.TEXT
 });
 
-// User.sync({force: false}).then(() => {
-// User.create({id: "forest", trees: 0})
-// });
+Team.sync({force: false}).then(() => {
+});
 
-// Idea.sync({force: true}).then(() => {
-// });
+Question.sync({force: true}).then(() => {
+});
+
+Answer.sync({force: true}).then(() => {
+});
 
 let teams = {};
-
-exports.teams = function (team) {
-
-    Team.create(team).then( function (result) {
-
-    });
-};
 
 exports.createTeam = function (team) {
 
     Team.create(team).then( function (result) {
-
+        teams[result.id] = result;
     });
 };
 
 exports.updateTeam = function (team) {
 
-    User.update({trees: forest.trees}, { where: { id: "forest" } }).then((result) => {});
+    // User.update({trees: forest.trees}, { where: { id: "forest" } }).then((result) => {});
 };
 
 function buildDatabase() {
@@ -66,9 +61,9 @@ function buildDatabase() {
                 plain: true
             });
 
-            teams.teams[user.id] = user;
+            teams[team.id] = team;
         });
     });
 }
 
-buildDatabaseMap();
+buildDatabase();
