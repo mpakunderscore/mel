@@ -1,7 +1,7 @@
-let dbTeams = {};
+let dbState = {};
 
-exports.run = function (globalTeams) {
-    dbTeams = globalTeams;
+exports.run = function (globalState) {
+    dbState = globalState;
 };
 
 let Sequelize = require('sequelize');
@@ -17,24 +17,27 @@ let set = {
     }
 };
 
-// let sequelize = new Sequelize('mel', 'pavelkuzmin', '', set);
-let sequelize = new Sequelize(process.env.DATABASE_URL);
+let sequelize = new Sequelize('mel', 'pavelkuzmin', '', set);
+// let sequelize = new Sequelize(process.env.DATABASE_URL);
 
 let Team = sequelize.define('team', {
-    id: { type: Sequelize.STRING, primaryKey: true }
+    name: Sequelize.STRING,
 });
 
 let Question = sequelize.define('question', {
     title: Sequelize.TEXT,
-    answer: Sequelize.TEXT
+    answer: Sequelize.STRING
 });
 
 let Answer = sequelize.define('answer', {
-    team: Sequelize.STRING,
+    answer: Sequelize.INTEGER,
+    team: Sequelize.INTEGER,
+    success: Sequelize.BOOLEAN,
     attempts: Sequelize.INTEGER
 });
 
-// Team.sync({force: false}).then(() => {
+//TODO
+// Team.sync({force: true}).then(() => {
 // });
 //
 // Question.sync({force: true}).then(() => {
@@ -46,13 +49,19 @@ let Answer = sequelize.define('answer', {
 exports.createTeam = function (team) {
 
     Team.create(team).then( function (result) {
-        dbTeams[result.id] = result;
+        dbState.teams[result.id] = result;
     });
 };
 
-exports.updateTeam = function (team) {
+exports.createQuestion = function (question) {
 
-    // User.update({trees: forest.trees}, { where: { id: "forest" } }).then((result) => {});
+    Question.create(question).then( function (result) {
+        dbState.questions[result.id] = result;
+    });
+};
+
+exports.answer = function (team, answer) {
+
 };
 
 function buildDatabase() {
@@ -65,7 +74,31 @@ function buildDatabase() {
                 plain: true
             });
 
-            dbTeams[team.id] = team;
+            dbState.teams[team.id] = team;
+        });
+    });
+
+    Question.findAll().then(questions => {
+
+        questions.forEach((question) => {
+
+            question = question.get({
+                plain: true
+            });
+
+            dbState.questions[question.id] = question;
+        });
+    });
+
+    Answer.findAll().then(answers => {
+
+        answers.forEach((answer) => {
+
+            answer = answer.get({
+                plain: true
+            });
+
+            dbState.answers[answer.id] = answer;
         });
     });
 }

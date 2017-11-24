@@ -22,6 +22,9 @@
 
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 
+        <script src='js/lib/tablesort.min.js'></script>
+        <script src='js/lib/sorts/tablesort.number.min.js'></script>
+
     </head>
 
     <body onload="results()">
@@ -30,7 +33,16 @@
             <a href="/">Map</a>
         </div>
 
-        <div id="results"></div>
+        <table id="results">
+            <thead>
+                <tr id="results-head"></tr>
+            </thead>
+            <tbody id="results-body"></tbody>
+        </table>
+
+        <script>
+            new Tablesort(document.getElementById('results'));
+        </script>
 
     </body>
 

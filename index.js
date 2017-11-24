@@ -1,7 +1,12 @@
 //caching
-let teams = {};
+
+let state = {};
+state.teams = {};
+state.questions = {};
+state.answers = {};
+
 let database = require('./database.js');
-database.run(teams);
+database.run(state);
 
 
 let express = require('express');
@@ -19,15 +24,38 @@ app.get('/results', function (request, response) {
 
 //API WEB
 app.get('/teams', function (request, response) {
-    response.json(teams);
+
+
+    let out = {};
+
+    out.teams = state.teams;
+    out.questions = state.questions;
+
+    response.json(out);
 });
+
 
 //ADMIN
 app.get('/question/create', function (request, response) {
 
+    let title = request.param('title');
+    let answer = request.param('answer');
+
+    let lat = request.param('lat');
+    let lon = request.param('lon');
+
+    database.createQuestion({title: title, answer: answer});
+
+    response.sendStatus(200);
 });
 
-//TEAM
+//ADMIN
+app.get('/questions', function (request, response) {
+
+    response.json(state.questions);
+});
+
+//
 app.get('/team/create/:name', function (request, response) {
 
     let name = request.params.name;
@@ -35,13 +63,18 @@ app.get('/team/create/:name', function (request, response) {
     if (name === null)
         return;
 
-    database.createTeam({id: name})
+    database.createTeam({name: name});
 
-    response.json();
+    response.sendStatus(200);
 });
 
+
+//TEAM
 app.get('/team/answer', function (request, response) {
-    // database.createTeam({title: request.params.title})
+
+    if (dbState.answers[team.id][answer.id]) {
+
+    }
 });
 
 
