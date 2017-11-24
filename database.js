@@ -17,8 +17,8 @@ let set = {
     }
 };
 
-let sequelize = new Sequelize('mel', 'pavelkuzmin', '', set);
-// let sequelize = new Sequelize(process.env.DATABASE_URL);
+// let sequelize = new Sequelize('mel', 'pavelkuzmin', '', set);
+let sequelize = new Sequelize(process.env.DATABASE_URL);
 
 let Team = sequelize.define('team', {
     name: Sequelize.STRING,
