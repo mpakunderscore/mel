@@ -1,3 +1,9 @@
+let dbTeams = {};
+
+exports.run = function (globalTeams) {
+    dbTeams = globalTeams;
+};
+
 let Sequelize = require('sequelize');
 
 let set = {
@@ -11,8 +17,8 @@ let set = {
     }
 };
 
-// let sequelize = new Sequelize('mel', 'pavelkuzmin', '', set);
-let sequelize = new Sequelize(process.env.DATABASE_URL);
+let sequelize = new Sequelize('mel', 'pavelkuzmin', '', set);
+// let sequelize = new Sequelize(process.env.DATABASE_URL);
 
 let Team = sequelize.define('team', {
     id: { type: Sequelize.STRING, primaryKey: true }
@@ -24,25 +30,23 @@ let Question = sequelize.define('question', {
 });
 
 let Answer = sequelize.define('answer', {
-    title: Sequelize.TEXT,
-    answer: Sequelize.TEXT
+    team: Sequelize.STRING,
+    attempts: Sequelize.INTEGER
 });
 
-Team.sync({force: false}).then(() => {
-});
-
-Question.sync({force: true}).then(() => {
-});
-
-Answer.sync({force: true}).then(() => {
-});
-
-let teams = {};
+// Team.sync({force: false}).then(() => {
+// });
+//
+// Question.sync({force: true}).then(() => {
+// });
+//
+// Answer.sync({force: true}).then(() => {
+// });
 
 exports.createTeam = function (team) {
 
     Team.create(team).then( function (result) {
-        teams[result.id] = result;
+        dbTeams[result.id] = result;
     });
 };
 
@@ -61,7 +65,7 @@ function buildDatabase() {
                 plain: true
             });
 
-            teams[team.id] = team;
+            dbTeams[team.id] = team;
         });
     });
 }
