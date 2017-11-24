@@ -83,7 +83,7 @@ exports.answer = function (answer) {
             // Answer.findById(answer.id).then(function(user) {
 
 
-            });
+            // });
 
             dbState.answers[answer.question + "|" + answer.team] = answer;
         });
