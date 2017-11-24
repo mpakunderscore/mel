@@ -21,7 +21,7 @@ function results() {
 
                 for (let key in data.questions) {
 
-                    tr += "<td data-sort-method='thead'>" + 1 + "</td>";
+                    tr += "<td data-sort-method='thead'>" + 0 + "</td>";
                 }
 
                 tr += "</tr>";

@@ -55,6 +55,11 @@ app.get('/questions', function (request, response) {
     response.json(state.questions);
 });
 
+app.get('/answers', function (request, response) {
+
+    response.json(state.answers);
+});
+
 //
 app.get('/team/create/:name', function (request, response) {
 
@@ -72,12 +77,41 @@ app.get('/team/create/:name', function (request, response) {
 //TEAM
 app.get('/answer', function (request, response) {
 
-    console.log(request.param('question'))
-    console.log(request.param('answer'))
+    let teamId = 0;
+    let questionId = request.param('question');
 
-    // if (state.answers[team.id][answer.id]) {
-    //
-    // }
+    let serverAnswer = state.answers[request.param('question') + "|" + teamId];
+
+    console.log();
+    console.log(request.param('answer'));
+
+    let correct = state.questions[request.param('question')]['answer'].toLowerCase() === request.param('answer').toLowerCase();
+
+    if (serverAnswer !== undefined) {
+
+        if (serverAnswer.attempts > 2) {
+
+            //TODO
+            response.sendStatus(400);
+            return;
+        }
+
+        serverAnswer.attempts++;
+
+        if (correct) {
+            serverAnswer.success = true;
+        }
+
+    } else {
+
+        serverAnswer = {};
+        serverAnswer.team = teamId;
+        serverAnswer.question = questionId;
+        serverAnswer.attempts = 1;
+        serverAnswer.success = correct;
+    }
+
+    database.answer(serverAnswer);
 
     response.sendStatus(200);
 });

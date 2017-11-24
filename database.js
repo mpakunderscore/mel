@@ -32,7 +32,7 @@ let Question = sequelize.define('question', {
 });
 
 let Answer = sequelize.define('answer', {
-    answer: Sequelize.INTEGER,
+    question: Sequelize.INTEGER,
     team: Sequelize.INTEGER,
     success: Sequelize.BOOLEAN,
     attempts: Sequelize.INTEGER
@@ -62,8 +62,20 @@ exports.createQuestion = function (question) {
     });
 };
 
-exports.answer = function (team, answer) {
+exports.answer = function (answer) {
 
+    if (answer.id === undefined) {
+
+        Answer.create(answer).then( function (result) {
+            dbState.answers[answer.question + "|" + answer.team] = result;
+        });
+
+    } else {
+
+        Answer.update(answer, { where: { id: answer.id } }).then((result) => {
+            dbState.answers[answer.question + "|" + answer.team] = result;
+        });
+    }
 };
 
 function buildDatabase() {
@@ -100,7 +112,7 @@ function buildDatabase() {
                 plain: true
             });
 
-            dbState.answers[answer.id] = answer;
+            dbState.answers[answer.question + "|" + answer.team] = answer;
         });
     });
 }
