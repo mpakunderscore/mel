@@ -17,8 +17,8 @@ let set = {
     }
 };
 
-// let sequelize = new Sequelize('mel', 'pavelkuzmin', '', set);
-let sequelize = new Sequelize(process.env.DATABASE_URL);
+let sequelize = new Sequelize('mel', 'pavelkuzmin', '', set);
+// let sequelize = new Sequelize(process.env.DATABASE_URL);
 
 let Team = sequelize.define('team', {
     name: Sequelize.STRING,
@@ -73,7 +73,19 @@ exports.answer = function (answer) {
     } else {
 
         Answer.update(answer, { where: { id: answer.id } }).then((result) => {
-            dbState.answers[answer.question + "|" + answer.team] = result;
+
+            // result = result.get({
+            //     plain: true
+            // });
+
+            //fuckin shit :O
+
+            // Answer.findById(answer.id).then(function(user) {
+
+
+            });
+
+            dbState.answers[answer.question + "|" + answer.team] = answer;
         });
     }
 };

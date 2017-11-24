@@ -169,6 +169,7 @@ function closeAnswer() {
 
 function saveAnswer() {
 
+    //JS + JQ -_ -
     let answer = document.getElementById('answer').getElementsByClassName('field')[1].innerText;
 
     $.get("answer?question=" + this.question.id + "&answer=" + answer, function(data) {

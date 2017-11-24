@@ -157,3 +157,7 @@ th {
     /*color: green;*/
     background-color: lightgreen;
 }
+
+#join {
+    display: none;
+}

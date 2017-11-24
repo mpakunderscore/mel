@@ -113,6 +113,7 @@ app.get('/answer', function (request, response) {
             return;
         }
 
+        //bug here
         serverAnswer.attempts++;
 
         if (correct) {

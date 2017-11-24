@@ -34,7 +34,7 @@
         <div id="menu">
             <!--<a href="/">Map</a>-->
             <a href="/results">Results</a>
-            <a href="/join">Join</a>
+            <a onclick="openJoin()">Join</a>
         </div>
 
         <div id="map"></div>
@@ -56,6 +56,14 @@
             <div class="buttons">
                 <span class="button" onclick="saveAnswer()">Save</span>
                 <span class="button" onclick="closeAnswer()">Close</span>
+            </div>
+        </div>
+
+        <div id="join" class="modal">
+            <div class="field" contenteditable="true" onclick="clearField(this)">Team name is ID and free to use</div>
+            <div class="buttons">
+                <span class="button" onclick="startGame()">Start</span>
+                <span class="button" onclick="closeJoin()">Close</span>
             </div>
         </div>
 
