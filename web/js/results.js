@@ -5,11 +5,11 @@ function results() {
         console.log(data)
 
         $("#results-head").append("<td>Name</td>");
-        $("#results-head").append("<td data-sort-method='thead'>Place</td>")
+        $("#results-head").append("<td data-sort-method='number'>Place</td>");
 
-        for (let key in data.questoins) {
+        for (let key in data.questions) {
 
-            $("#results-head").append("<tr data-sort-method='thead'>" + data.questoins[key] + "</tr>")
+            $("#results-head").append("<td data-sort-method='number'>" + data.questions[key].id + "</td>")
         }
 
         for (let key in data.teams) {
@@ -20,6 +20,11 @@ function results() {
                 tr += "<td>" + data.teams[key].name + "</td>";
 
                 tr += "<td>" + data.teams[key].id + "</td>";
+
+                for (let key in data.questions) {
+
+                    tr += "<td data-sort-method='thead'>" + 1 + "</td>";
+                }
 
                 tr += "</tr>";
 

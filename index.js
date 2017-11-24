@@ -42,9 +42,9 @@ app.get('/question/create', function (request, response) {
     let answer = request.param('answer');
 
     let lat = request.param('lat');
-    let lon = request.param('lon');
+    let lng = request.param('lng');
 
-    database.createQuestion({title: title, answer: answer});
+    database.createQuestion({title: title, answer: answer, lat: lat, lng: lng});
 
     response.sendStatus(200);
 });

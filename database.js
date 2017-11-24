@@ -26,7 +26,9 @@ let Team = sequelize.define('team', {
 
 let Question = sequelize.define('question', {
     title: Sequelize.TEXT,
-    answer: Sequelize.STRING
+    answer: Sequelize.STRING,
+    lat: Sequelize.FLOAT,
+    lng: Sequelize.FLOAT
 });
 
 let Answer = sequelize.define('answer', {

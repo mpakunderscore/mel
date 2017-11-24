@@ -12,6 +12,8 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
         <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -27,7 +29,7 @@
 
     </head>
 
-    <body>
+    <body onload="buildMap()">
 
         <div id="menu">
             <!--<a href="/">Map</a>-->
@@ -35,6 +37,17 @@
         </div>
 
         <div id="map"></div>
+
+
+        <div id="constructor">
+            <div class="field" contenteditable="true"></div>
+            <div class="field" contenteditable="true"></div>
+            <div class="buttons">
+                <span class="button" onclick="saveMarker()">Save</span>
+                <span class="button" onclick="closeMarker()">Close</span>
+            </div>
+        </div>
+
 
     </body>
 

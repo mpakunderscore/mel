@@ -28,11 +28,12 @@ body {
 }
 
 #menu {
-    position: fixed;
+    /*position: fixed;*/
+    width: 100%;
     flex-direction: column;
 
-    left: 20px;
-    top: 20px;
+    /*left: 20px;*/
+    /*top: 20px;*/
 
     padding: 20px;
 
@@ -42,6 +43,8 @@ body {
 
     transition: box-shadow 5s ease-in-out;
     border-radius: 2px;
+
+    text-align: center;
 }
 
 #menu:hover {
@@ -51,6 +54,7 @@ body {
 #menu a {
     text-decoration: none;
     color: black;
+    padding: 10px;
 }
 
 #menu a:hover {
@@ -71,7 +75,59 @@ body {
 }
 
 #results {
+    min-width: 500px;
+
+    margin-top: 200px;
+
+    /*display: b;*/
     padding: 20px;
-    margin: 20px;
+    /*margin: 20px;*/
     background-color: lightcyan;
+}
+
+#constructor {
+    /*position: fixed;*/
+    display: none;
+
+    min-width: 400px;
+    /*min-height: 200px;*/
+    background-color: ghostwhite;
+
+    margin-top: 200px;
+
+    z-index: 2;
+    transition: box-shadow 5s ease-in-out;
+    border-radius: 2px;
+
+    text-align: center;
+}
+
+#constructor:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+#constructor .field {
+    /*padding: 10px;*/
+}
+
+.field {
+    margin: 10px;
+    background-color: white;
+    border-radius: 2px;
+
+    text-align: left;
+}
+
+.buttons {
+    padding: 10px;
+    text-align: left;
+}
+
+.button {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.button:hover {
+    color: #86c220;
 }

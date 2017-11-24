@@ -4,6 +4,8 @@ let buffer;
 
 let center;
 
+let region;
+
 function initMap() {
 
     let mapOptions;
@@ -65,9 +67,51 @@ function initMap() {
         localStorage.setItem("mapLng", mapCentre.lng());
         localStorage.setItem("mapZoom", map.getZoom());
     });
+
+    google.maps.event.addListener(map, "rightclick", function(event) {
+
+        let lat = event.latLng.lat();
+        let lng = event.latLng.lng();
+
+        // populate yor box/field with lat, lng
+        // alert("Lat=" + lat + "; Lng=" + lng);
+        openConstructor({lat: lat, lng: lng});
+    });
 }
 
-function createMarker(user, position) {
+function openConstructor(region) {
+
+    this.region = region;
+
+    document.getElementById('constructor').style.display = 'block';
+}
+
+function saveMarker() {
+
+    let fields = document.getElementById('constructor').getElementsByClassName('field');
+
+    let title = fields[0].innerText;
+    let answer = fields[1].innerText;
+
+    document.getElementById('constructor').style.display = 'none';
+
+    console.log(title + " " + answer + " " + this.region);
+
+    $.get("question/create?title=" + title +
+        "&answer=" + answer +
+        "&lat=" + this.region.lat +
+        "&lng=" + this.region.lng, function( data ) {
+
+    });
+
+    createMarker(this.region);
+}
+
+function closeMarker() {
+    document.getElementById('constructor').style.display = 'none';
+}
+
+function createMarker(region) {
 
     let image = {
         url: "",
@@ -81,18 +125,37 @@ function createMarker(user, position) {
         scaledSize: new google.maps.Size(100, 100)
     };
 
-    user.marker = new google.maps.Marker({
+    let marker = new google.maps.Marker({
 
-        position: position,
+        position: region,
         map: map,
         // label: 'Label',
-        icon: image
+        // icon: image
     });
 
-    user.marker.addListener('click', function() {
+    marker.addListener('click', function() {
         // map.setZoom(8);
         // map.setCenter(marker.getPosition());
         // alert('marker click: ' + user.id)
-        openConstructor(user, position);
+
+        openAnswer();
+    });
+}
+
+function openAnswer() {
+
+}
+
+function buildMap() {
+
+    $.getJSON("questions", function(data) {
+
+        for (let key in data) {
+
+            console.log(data[key])
+
+            createMarker({lat: data[key]['lat'], lng: data[key]['lng']})
+        }
+
     });
 }

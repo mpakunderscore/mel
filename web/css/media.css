@@ -1,0 +1,10 @@
+@media only screen and (max-width : 640px) {
+
+    #results {
+        min-width: auto;
+    }
+
+    #constructor {
+        width: 100%;
+    }
+}
