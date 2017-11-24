@@ -102,12 +102,29 @@ body {
     text-align: center;
 }
 
+#answer {
+    display: none;
+}
+
+.modal {
+    min-width: 400px;
+    background-color: ghostwhite;
+
+    margin-top: 200px;
+
+    z-index: 2;
+    transition: box-shadow 5s ease-in-out;
+    border-radius: 2px;
+
+    text-align: center;
+}
+
 #constructor:hover {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-#constructor .field {
-    /*padding: 10px;*/
+.field {
+    padding: 10px;
 }
 
 .field {

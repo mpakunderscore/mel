@@ -4,12 +4,10 @@ function results() {
 
         console.log(data)
 
-        $("#results-head").append("<td>Name</td>");
-        $("#results-head").append("<td data-sort-method='number'>Place</td>");
 
         for (let key in data.questions) {
 
-            $("#results-head").append("<td data-sort-method='number'>" + data.questions[key].id + "</td>")
+            $("#results-head").append("<td data-sort-method='number'>" + data.questions[key].title + "</td>")
         }
 
         for (let key in data.teams) {

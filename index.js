@@ -70,11 +70,16 @@ app.get('/team/create/:name', function (request, response) {
 
 
 //TEAM
-app.get('/team/answer', function (request, response) {
+app.get('/answer', function (request, response) {
 
-    if (dbState.answers[team.id][answer.id]) {
+    console.log(request.param('question'))
+    console.log(request.param('answer'))
 
-    }
+    // if (state.answers[team.id][answer.id]) {
+    //
+    // }
+
+    response.sendStatus(200);
 });
 
 

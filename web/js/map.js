@@ -6,6 +6,8 @@ let center;
 
 let region;
 
+let questionId = 0;
+
 function initMap() {
 
     let mapOptions;
@@ -111,7 +113,9 @@ function closeMarker() {
     document.getElementById('constructor').style.display = 'none';
 }
 
-function createMarker(region) {
+function createMarker(question) {
+
+    let region = {lat: question['lat'], lng: question['lng']}
 
     let image = {
         url: "",
@@ -138,12 +142,39 @@ function createMarker(region) {
         // map.setCenter(marker.getPosition());
         // alert('marker click: ' + user.id)
 
-        openAnswer();
+        openAnswer(question);
     });
 }
 
-function openAnswer() {
+function openAnswer(question) {
 
+    this.question = question;
+
+    console.log(question.title);
+
+    let fields = document.getElementById('answer').getElementsByClassName('field');
+
+    fields[0].innerHTML = question.title;
+
+    // document.getElementById("myspan").innerHTML = "sometext";
+    // let answer = fields[1].innerText;
+
+    document.getElementById('answer').style.display = 'block';
+
+}
+
+function closeAnswer() {
+    document.getElementById('answer').style.display = 'none';
+}
+
+function saveAnswer() {
+
+    let answer = document.getElementById('answer').getElementsByClassName('field')[1].innerText;
+
+    $.get("answer?question=" + this.question.id + "&answer=" + answer, function(data) {
+
+        closeAnswer();
+    });
 }
 
 function buildMap() {
@@ -154,7 +185,7 @@ function buildMap() {
 
             console.log(data[key])
 
-            createMarker({lat: data[key]['lat'], lng: data[key]['lng']})
+            createMarker(data[key])
         }
 
     });
