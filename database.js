@@ -39,14 +39,14 @@ let Answer = sequelize.define('answer', {
 });
 
 //TODO
-Team.sync({force: true}).then(() => {
-});
-
-Question.sync({force: true}).then(() => {
-});
-
-Answer.sync({force: true}).then(() => {
-});
+// Team.sync({force: true}).then(() => {
+// });
+//
+// Question.sync({force: true}).then(() => {
+// });
+//
+// Answer.sync({force: true}).then(() => {
+// });
 
 exports.createTeam = function (team) {
 
