@@ -1,3 +1,3 @@
 function results() {
-    document.getElementById("results").innerHTML = "Some text here";
+    document.getElementById("results").innerHTML = teams.toString();
 }

@@ -1,4 +1,4 @@
-let results = {};
+let database = require('./database.js');
 
 let express = require('express');
 let path = require('path');
@@ -12,6 +12,8 @@ app.get('/results', function (request, response) {
     response.sendFile(path.join(__dirname, 'web/results.html'));
 });
 
-app.listen(process.env.PORT || 8001);
+app.get('/team/create', function (request, response) {
+    database.createTeam({title: request.params.title})
+});
 
-let database = require('./database.js');
+app.listen(process.env.PORT || 8001);
